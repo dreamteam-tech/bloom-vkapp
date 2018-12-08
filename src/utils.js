@@ -1,5 +1,16 @@
+import accounting from 'accounting';
 import { local } from 'easy-storage';
 import { USER_LOCALSTORAGE_KEY } from './consts';
+
+export function formatMoney(value) {
+  return accounting.formatMoney(value, {
+    symbol : " р.",
+    decimal : ".",
+    thousand: " ",
+    precision : 2,
+    format: "%v%s"
+  });
+}
 
 export function loadUser() {
   const user = local.get(USER_LOCALSTORAGE_KEY, null);

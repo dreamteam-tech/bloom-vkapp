@@ -14,3 +14,6 @@ export {
   TRANSACTION_LIST,
   TRANSACTION_CHART
 } from './transaction';
+export {
+  DASHBOARD
+} from './dashboard';

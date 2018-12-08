@@ -1,0 +1,48 @@
+.b-pay-list {
+  &__row {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    grid-gap: 2rem;
+    align-items: center;
+    @include elevation(2);
+    margin-bottom: 1rem;
+    background: {
+      color: rgba(#fff, .1);
+    }
+    color: rgba(#fff, .2);
+    height: 86px;
+    padding: .5rem 1rem;
+    border-radius: .2rem;
+    transition: all .2s ease;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 0 2px flexy-color() inset;
+    }
+
+    &--active {
+      box-shadow: 0 0 0 2px flexy-color() inset;
+      color: #fff;
+    }
+  }
+
+  &__img {
+    max-width: 64px;
+    max-height: 64px;
+    opacity: .2;
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 18px;
+  }
+
+  &__description {
+
+  }
+}

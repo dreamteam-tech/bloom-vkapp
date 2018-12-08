@@ -1,9 +1,14 @@
 export { StrategyList } from './StrategyList';
 export { TransactionList } from './TransactionList';
 export { Header } from './Header';
+export { HeaderButton } from './HeaderButton';
+export { Menu } from './Menu';
+export { Logo } from './Logo';
+export { StrategySlider } from './StrategySlider';
 export { HeaderTitle } from './HeaderTitle';
 export { Content } from './Content';
 export { Screen } from './Screen';
+export { Dashboard } from './Dashboard';
 export { StrategySummary } from './StrategySummary';
 export { StrategyChart } from './StrategyChart';
 export { ListRow } from './ListRow';

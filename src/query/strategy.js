@@ -7,6 +7,7 @@ export const STRATEGY_LIST = gql`
       name
       description
       percent
+      has_investments
     }
   }
 `;

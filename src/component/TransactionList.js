@@ -6,9 +6,7 @@ import { TransactionList as Container } from '../container';
 
 export const TransactionList = compose(
   graphql(TRANSACTION_LIST, {
-    options: props => ({
-      variables: { strategy_id: props.strategy.id }
-    })
+    options: props => ({ variables: props.filter })
   }),
   withGenericState,
   withProps(props => ({

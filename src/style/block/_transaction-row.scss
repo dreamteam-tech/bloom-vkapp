@@ -1,0 +1,28 @@
+.b-transaction-row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-gap: 1rem;
+
+  &__type {
+
+  }
+  &__strategy {
+    color: rgba(#fff, .5);
+  }
+
+  &__date {
+    text-align: right;
+  }
+
+  &__amount {
+    text-align: right;
+
+    &--green {
+      color: flexy-color(success);
+    }
+
+    &--red {
+      color: flexy-color(error);
+    }
+  }
+}

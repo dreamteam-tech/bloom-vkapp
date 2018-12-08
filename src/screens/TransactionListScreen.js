@@ -1,15 +1,16 @@
 import { Transition } from 'firefly/component/Transition';
 import React from 'react';
-import { StrategySlider } from '../component';
+import { TransactionList } from '../component';
 import { Screen, Header, HeaderButton } from '../container';
 
-export const StrategyListScreen = ({ id, go }) => (
+export const TransactionListScreen = ({ id, go }) => (
   <Screen>
     <Header
       left={<HeaderButton icon='ArrowLeft' onClick={() => go('Dashboard')} />}
-      title='Стратегии'/>
+      title='Операции'/>
     <Transition>
-      <StrategySlider onClick={strategy => go('StrategyView', { strategy })} />
+      <TransactionList
+        onClick={transaction => go('TransactionView', { transaction })}/>
     </Transition>
   </Screen>
 );

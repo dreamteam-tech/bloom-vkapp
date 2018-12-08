@@ -1,6 +1,7 @@
 .b-body {
   @include antialias;
   background: {
-    color: flexy-color();
+    color: flexy-color(blue);
+    image: linear-gradient(flexy-color(blue), darken(flexy-color(blue), 15%));
   }
 }

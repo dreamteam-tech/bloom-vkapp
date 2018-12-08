@@ -1,13 +1,22 @@
 import React, { createElement } from 'react';
-// import '@vkontakte/vkui/dist/vkui.css';
-import { StrategyListScreen, StrategyViewScreen } from './screens';
+import { Header, HeaderButton, Screen } from './container';
+import {
+  StrategyListScreen,
+  DashboardScreen,
+  DebugScreen,
+  PayScreen,
+  TransactionListScreen,
+  SettingsScreen,
+  StrategyJoinScreen,
+  StrategyViewScreen
+} from './screens';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activePanel: 'StrategyList',
+      activePanel: 'Pay',
       fetchedUser: null
     };
   }
@@ -19,8 +28,14 @@ class App extends React.Component {
 
   render() {
     const mapping = {
+      "Pay": PayScreen,
+      "Dashboard": DashboardScreen,
+      "Settings": SettingsScreen,
+      "Debug": DebugScreen,
+      "TransactionList": TransactionListScreen,
       "StrategyList": StrategyListScreen,
-      "StrategyView": StrategyViewScreen
+      "StrategyView": StrategyViewScreen,
+      "StrategyJoin": StrategyJoinScreen
     };
 
     const { activePanel, data } = this.state;
@@ -32,7 +47,13 @@ class App extends React.Component {
       });
     }
 
-    return null;
+    return (
+      <Screen>
+        <Header
+          left={<HeaderButton icon='ArrowLeft' onClick={() => this.go('Dashboard')} />}
+          title='Раздел не найден'/>
+      </Screen>
+    );
   }
 }
 

@@ -1,0 +1,33 @@
+@mixin flexy-heading {
+  .b-heading {
+    &--xxlarge {
+      font-size: flexy-size(xxlarge);
+      @content;
+    }
+
+    &--xlarge {
+      font-size: flexy-size(xlarge);
+      @content;
+    }
+
+    &--large {
+      font-size: flexy-size(large);
+      @content;
+    }
+
+    &--medium {
+      font-size: flexy-size(medium);
+      @content;
+    }
+
+    &--small {
+      font-size: flexy-size(small);
+      @content;
+    }
+
+    &--xsmall {
+      font-size: flexy-size(xsmall);
+      @content;
+    }
+  }
+}

@@ -1,40 +1,38 @@
-import React from 'react';
-import connect from '@vkontakte/vkui-connect';
-import { Button, View } from '@vkontakte/vkui';
-import '@vkontakte/vkui/dist/vkui.css';
-
-import {
-  HomeScreen,
-  PersikScreen,
-  StrategyListScreen,
-  StrategyViewScreen
-} from './screens';
+import React, { createElement } from 'react';
+// import '@vkontakte/vkui/dist/vkui.css';
+import { StrategyListScreen, StrategyViewScreen } from './screens';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activePanel: 'home',
+      activePanel: 'StrategyList',
       fetchedUser: null
     };
   }
 
-  go = (e) => {
-    this.setState({
-      activePanel: e.currentTarget.dataset.to
-    })
+  go = (activePanel, data = {}) => {
+    console.log(activePanel, data);
+    this.setState({ activePanel, data });
   };
 
   render() {
-    return (
-      <View activePanel={this.state.activePanel}>
-        <HomeScreen id="home" go={this.go}/>
-        <StrategyListScreen id="StrategyList" go={this.go} />
-        <StrategyViewScreen id="StrategyView" go={this.go} />
-        <PersikScreen id="persik" go={this.go}/>
-      </View>
-    );
+    const mapping = {
+      "StrategyList": StrategyListScreen,
+      "StrategyView": StrategyViewScreen
+    };
+
+    const { activePanel, data } = this.state;
+
+    if (activePanel in mapping) {
+      return createElement(mapping[activePanel], {
+        ...data,
+        go: this.go
+      });
+    }
+
+    return null;
   }
 }
 

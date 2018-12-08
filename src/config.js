@@ -1,4 +1,5 @@
-const endpoint = process.env.NODE_ENV === 'production' ? 'https://hack.dreamteam.tech' : 'http://localhost:4000';
+const isProd = process.env.NODE_ENV === 'production';
+const endpoint = isProd ? 'https://graphql.dreamteam.tech' : 'http://localhost:4000';
 
 module.exports = {
   graphqlEndpoint: `${endpoint}/graphql`,

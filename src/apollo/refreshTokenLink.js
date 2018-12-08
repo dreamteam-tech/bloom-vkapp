@@ -23,6 +23,10 @@ export const refreshTokenLink = (link) =>
           let doForward = true;
 
           const user = loadUser();
+          if (null === user) {
+            return;
+          }
+
           // old token has expired throwing AuthenticationError,
           // one way to handle is to obtain a new token and
           // add it to the operation context

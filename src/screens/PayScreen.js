@@ -13,8 +13,10 @@ const iconMapping = {
   vk: vkImg
 };
 
-const PayRow = ({ isActive, name, description, icon }) => (
-  <div className={bem("b-pay-list__row", { active: isActive })}>
+const PayRow = ({ isActive, name, description, onClick, icon }) => (
+  <div
+    onClick={onClick}
+    className={bem("b-pay-list__row", { active: isActive })}>
     <div className="b-pay-list__icon">
       {icon && (
         <img className={bem("b-pay-list__img", { active: isActive })} src={iconMapping[icon]} alt={name}/>
@@ -37,7 +39,9 @@ export const PayScreen = ({ go, strategy, onClose, setOpen, isOpen }) => (
         <Transition>
           <PayRow
             isActive={true}
-            onClick={() => connect.send("VKWebAppOpenPayForm", config.vkCommunity)}
+            onClick={() => {
+              connect.send("VKWebAppOpenPayForm", config.vkCommunity)
+            }}
             icon='vk'
             name='VK Pay'
             description='Платеж через ВКонтакте'/>

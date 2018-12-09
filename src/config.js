@@ -4,11 +4,11 @@ const endpoint = isProd ? 'https://graphql.dreamteam.tech' : 'http://localhost:4
 module.exports = {
   vkCommunity: {
     "app_id": 6776201,
-    "action": "pay-to-service",
+    "action": "pay-to-group",
     "params": {
       "amount": 1,
       "description": "тестовый платеж",
-      "group_id": 167121797
+      "group_id": 175055996
     }
   },
   graphqlEndpoint: `${endpoint}/graphql`,

@@ -1,8 +1,11 @@
 import React from 'react';
+import BigNumber from 'bignumber.js';
 import { bem, Button, H1, Icon } from 'firefly/component';
 import { formatMoney } from '../utils';
 import { HeaderButton } from './HeaderButton';
 import { StrategyChart } from './StrategyChart';
+
+const bigNumberify = value => new BigNumber(value);
 
 const DashboardRow = ({ row, onPay, onWithdraw }) => (
   <div>
@@ -27,7 +30,7 @@ const DashboardRow = ({ row, onPay, onWithdraw }) => (
           {row.amount < row.invested && (
             <Icon className='b-dashboard__icon' icon='ArrowDown'/>
           )}
-          123%
+          {bigNumberify(row.amount).minus(row.invested).div(row.amount).multipliedBy(100).toNumber().toFixed(2)}%
         </div>
       </div>
       <div className="b-dashboard__item">

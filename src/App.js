@@ -1,4 +1,5 @@
 import React, { createElement } from 'react';
+import connect from '@vkontakte/vkui-connect';
 import { Header, HeaderButton, Screen } from './container';
 import {
   StrategyListScreen,
@@ -19,6 +20,10 @@ class App extends React.Component {
       activePanel: 'Dashboard',
       fetchedUser: null
     };
+  }
+
+  componentDidMount() {
+    connect.send("VKWebAppResizeWindow", { "width": 800, "height": 1000 });
   }
 
   go = (activePanel, data = {}) => {
@@ -50,7 +55,7 @@ class App extends React.Component {
     return (
       <Screen>
         <Header
-          left={<HeaderButton icon='ArrowLeft' onClick={() => this.go('Dashboard')} />}
+          left={<HeaderButton icon='ArrowLeft' onClick={() => this.go('Dashboard')}/>}
           title='Раздел не найден'/>
       </Screen>
     );

@@ -8,12 +8,12 @@ import { ApolloProvider } from 'react-apollo';
 import ReactDOM from 'react-dom';
 import connect from '@vkontakte/vkui-connect';
 import client from './apolloClient';
-import Dispatcher from './App';
+import App from './App';
 
 connect.send('VKWebAppInit', {});
 
 ReactDOM.render((
   <ApolloProvider client={client}>
-    <Dispatcher/>
+    <App/>
   </ApolloProvider>
 ), document.getElementById('root'));

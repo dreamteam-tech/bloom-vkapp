@@ -1,45 +1,17 @@
 import React from 'react';
 import { Transition } from 'firefly/component';
-import { pure, compose, withProps, withState } from 'recompose';
-import { Dashboard, TransactionList } from '../component';
-import { Menu, HeaderButton, Header, Screen } from '../container';
-import { MenuItem } from '../container/MenuItem';
+import { Dashboard, HeaderMenuButton } from '../component';
+import { Header, Screen } from '../container';
 
-const menu = [
-  { icon: 'Activity', name: 'Рабочий стол', to: 'Dashboard' },
-  { icon: 'Layers', name: 'Стратегии', to: 'StrategyList' },
-  { icon: 'Percent', name: 'Операции', to: 'TransactionList' },
-  { icon: 'Settings', name: 'Настройки', to: 'Settings' },
-];
-
-export const Container = ({ go, onClose, setOpen, isOpen }) => (
+export const DashboardScreen = ({ go }) => (
   <Screen>
-    <Menu isOpen={isOpen} onClose={onClose}>
-      {menu.map((item, i) => (
-        <MenuItem key={i} onClick={() => {
-          setOpen(false);
-          go(item.to);
-        }} icon={item.icon} text={item.name} />
-      ))}
-    </Menu>
     <Header
-      left={<HeaderButton icon='Menu' onClick={() => setOpen(true)} />}
+      left={<HeaderMenuButton go={go}/>}
       title='Рабочий стол'/>
     <Transition>
       <Dashboard
         onPay={strategy => go('Pay', { strategy })}
-        onWithdraw={() => null} />
+        onWithdraw={() => null}/>
     </Transition>
   </Screen>
 );
-
-export const DashboardScreen = compose(
-  withState('isOpen', 'setOpen', false),
-  withProps(props => ({
-    ...props,
-    onClose: () => {
-      props.setOpen(false);
-    }
-  })),
-  pure,
-)(Container);

@@ -7,6 +7,21 @@ import { StrategyChart } from './StrategyChart';
 
 const bigNumberify = value => new BigNumber(value);
 
+const calc = row => {
+  const amount = bigNumberify(row.amount);
+  const invested = bigNumberify(row.invested);
+  if (amount.isEqualTo(invested)) {
+    return 0;
+  }
+
+  return amount
+    .minus(row.invested)
+    .div(row.amount)
+    .multipliedBy(100)
+    .toNumber()
+    .toFixed(2);
+};
+
 const DashboardRow = ({ row, onPay, onWithdraw }) => (
   <div>
     <div className="b-dashboard__hero">
@@ -30,7 +45,7 @@ const DashboardRow = ({ row, onPay, onWithdraw }) => (
           {row.amount < row.invested && (
             <Icon className='b-dashboard__icon' icon='ArrowDown'/>
           )}
-          {bigNumberify(row.amount).minus(row.invested).div(row.amount).multipliedBy(100).toNumber().toFixed(2)}%
+          {calc(row)}%
         </div>
       </div>
       <div className="b-dashboard__item">

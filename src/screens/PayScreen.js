@@ -2,7 +2,6 @@ import React from 'react';
 import { Transition, bem } from 'firefly/component';
 import connect from '@vkontakte/vkui-connect';
 import { HeaderButton, Header, Screen, Content } from '../container';
-import config from '../config';
 import coinpaymentsImg from '../img/coinpayments.svg';
 import vkImg from '../img/vk.svg';
 import visaImg from '../img/visa.svg';
@@ -39,9 +38,15 @@ export const PayScreen = ({ go, strategy, onClose, setOpen, isOpen }) => (
         <Transition>
           <PayRow
             isActive={true}
-            onClick={() => {
-              connect.send("VKWebAppOpenPayForm", config.vkCommunity)
-            }}
+            onClick={() => connect.send("VKWebAppOpenPayForm", {
+              "app_id": 6776201,
+              "action": "pay-to-group",
+              "params": {
+                "amount": 1,
+                "description": strategy.id,
+                "group_id": 175055996
+              }
+            })}
             icon='vk'
             name='VK Pay'
             description='Платеж через ВКонтакте'/>

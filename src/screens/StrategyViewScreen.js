@@ -1,12 +1,12 @@
 import React from 'react';
 import { H1, H2, Transition } from 'firefly/component';
-import { TransactionList, StrategyChart } from '../component';
-import { Content, Header, StrategySummary, Screen, HeaderButton } from '../container';
+import { TransactionList, StrategyChart, HeaderMenuButton } from '../component';
+import { Content, Header, StrategySummary, Screen } from '../container';
 
 export const StrategyViewScreen = ({ strategy, go }) => (
   <Screen>
     <Header
-      left={<HeaderButton icon='ArrowLeft' onClick={() => go('StrategyList')} />}
+      left={<HeaderMenuButton go={go}/>}
       title={strategy.name}/>
     <Transition>
       <Content>

@@ -3,5 +3,7 @@
   background: {
     color: flexy-color(blue);
     image: linear-gradient(flexy-color(blue), darken(flexy-color(blue), 15%));
+    repeat: no-repeat;
+    position: 0 0;
   }
 }

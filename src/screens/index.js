@@ -1,4 +1,3 @@
-export { DebugScreen } from './DebugScreen';
 export { SettingsScreen } from './SettingsScreen';
 export { StrategyListScreen } from './StrategyListScreen';
 export { PayScreen } from './PayScreen';

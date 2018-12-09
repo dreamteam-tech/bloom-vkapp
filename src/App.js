@@ -1,33 +1,46 @@
 import React, { createElement } from 'react';
+import { graphql } from 'react-apollo';
 import connect from '@vkontakte/vkui-connect';
+import { Spinner } from 'firefly/component';
+import { compose, pure } from 'recompose';
+import { REGISTRATION_VKONTAKTE_MUTATION } from './query';
 import { Header, HeaderButton, Screen } from './container';
-import {
-  StrategyListScreen,
-  DashboardScreen,
-  DebugScreen,
-  PayScreen,
-  TransactionListScreen,
-  SettingsScreen,
-  StrategyViewScreen
-} from './screens';
+import * as screens from './screens';
+import { persistUser } from './utils';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      loading: true,
       activePanel: 'Dashboard',
       fetchedUser: null
     };
   }
 
   componentDidMount() {
+    const {
+      mutate
+    } = this.props;
+
     connect.send("VKWebAppResizeWindow", { "width": 800, "height": 1000 });
 
     connect.subscribe((e) => {
       switch (e.detail.type) {
         case 'VKWebAppGetUserInfoResult':
-          console.log(e.detail.data);
+          mutate({
+            variables: {
+              first_name: e.detail.data.first_name,
+              last_name: e.detail.data.last_name,
+              vk_id: e.detail.data.id
+            }
+          }).then(response => {
+            persistUser(response.data.registrationVkontakte);
+            this.setState({
+              loading: false
+            });
+          });
           break;
 
         default:
@@ -43,24 +56,18 @@ class App extends React.Component {
     this.setState({ activePanel, data });
   };
 
-  render() {
+  renderScreen(activePanel, data) {
     const mapping = {
-      "Pay": PayScreen,
-      "Dashboard": DashboardScreen,
-      "Settings": SettingsScreen,
-      "Debug": DebugScreen,
-      "TransactionList": TransactionListScreen,
-      "StrategyList": StrategyListScreen,
-      "StrategyView": StrategyViewScreen
+      "Pay": screens.PayScreen,
+      "Dashboard": screens.DashboardScreen,
+      "Settings": screens.SettingsScreen,
+      "TransactionList": screens.TransactionListScreen,
+      "StrategyList": screens.StrategyListScreen,
+      "StrategyView": screens.StrategyViewScreen
     };
 
-    const { activePanel, data } = this.state;
-
     if (activePanel in mapping) {
-      return createElement(mapping[activePanel], {
-        ...data,
-        go: this.go
-      });
+      return createElement(mapping[activePanel], { ...data, go: this.go });
     }
 
     return (
@@ -71,6 +78,23 @@ class App extends React.Component {
       </Screen>
     );
   }
+
+  render() {
+    const { loading, activePanel, data } = this.state;
+
+    if (loading) {
+      return (
+        <Screen>
+          <Spinner/>
+        </Screen>
+      )
+    }
+
+    return this.renderScreen(activePanel, data);
+  }
 }
 
-export default App;
+export default compose(
+  graphql(REGISTRATION_VKONTAKTE_MUTATION),
+  pure
+)(App);

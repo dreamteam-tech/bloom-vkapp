@@ -1,5 +1,14 @@
 import gql from 'graphql-tag';
 
+export const REGISTRATION_VKONTAKTE_MUTATION = gql`
+  mutation registrationVkontakte($first_name: String, $last_name: String, $vk_id: ID) {
+    registrationVkontakte(first_name: $first_name, last_name: $last_name, vk_id: $vk_id) {
+      refreshToken
+      accessToken
+    }
+  }
+`;
+
 export const CHANGE_PASSWORD_MUTATION = gql`
   mutation changePassword($password: String, $password_confirm: String) {
     changePassword(password: $password, password_confirm: $password_confirm)

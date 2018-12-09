@@ -1,6 +1,6 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
-import { Divider, H2, bem, Button, H1, Icon } from 'firefly/component';
+import { Divider, H2, bem, Button, H1, Icon, Transition } from 'firefly/component';
 import { TransactionList } from '../component/TransactionList';
 import { formatMoney } from '../utils';
 import { Content } from './Content';
@@ -74,7 +74,7 @@ const DashboardRow = ({ row, onPay, onWithdraw }) => (
 );
 
 export const Dashboard = ({ row, rows, onPay, onWithdraw, onNext, onPrev }) => row && (
-  <div>
+  <Transition>
     <div className="b-dashboard__header">
       <HeaderButton onClick={onPrev} icon={rows.length > 1 ? 'ArrowLeft' : ''}/>
       <H1 className='b-dashboard__title'>{row.strategy.name}</H1>
@@ -86,5 +86,5 @@ export const Dashboard = ({ row, rows, onPay, onWithdraw, onNext, onPrev }) => r
       <H2>Операции</H2>
     </Content>
     <TransactionList filter={{ strategy_id: row.strategy.id }}/>
-  </div>
+  </Transition>
 );

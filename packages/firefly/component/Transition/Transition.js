@@ -24,7 +24,7 @@ export class Transition extends Component {
     cls: ''
   };
 
-  componentDidMount() {
+  startTimer() {
     const {
       transition
     } = this.props;
@@ -34,6 +34,10 @@ export class Transition extends Component {
         cls: `${transition}-active`
       });
     }, 0);
+  }
+
+  componentDidMount() {
+    this.startTimer();
   }
 
   componentWillUnmount() {

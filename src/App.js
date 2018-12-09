@@ -8,7 +8,6 @@ import {
   PayScreen,
   TransactionListScreen,
   SettingsScreen,
-  StrategyJoinScreen,
   StrategyViewScreen
 } from './screens';
 
@@ -24,6 +23,19 @@ class App extends React.Component {
 
   componentDidMount() {
     connect.send("VKWebAppResizeWindow", { "width": 800, "height": 1000 });
+
+    connect.subscribe((e) => {
+      switch (e.detail.type) {
+        case 'VKWebAppGetUserInfoResult':
+          console.log(e.detail.data);
+          break;
+
+        default:
+          console.log(e.detail.type);
+          break;
+      }
+    });
+    connect.send('VKWebAppGetUserInfo', {});
   }
 
   go = (activePanel, data = {}) => {
@@ -39,8 +51,7 @@ class App extends React.Component {
       "Debug": DebugScreen,
       "TransactionList": TransactionListScreen,
       "StrategyList": StrategyListScreen,
-      "StrategyView": StrategyViewScreen,
-      "StrategyJoin": StrategyJoinScreen
+      "StrategyView": StrategyViewScreen
     };
 
     const { activePanel, data } = this.state;

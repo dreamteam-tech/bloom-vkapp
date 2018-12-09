@@ -14,19 +14,4 @@
   &:active {
     color: #fff;
   }
-
-  &--big {
-    padding: .5rem;
-  }
-
-  &--rounded {
-    display: block;
-    margin: 0 auto;
-
-    &:hover,
-    &:focus,
-    &:active {
-      color: #fff;
-    }
-  }
 }

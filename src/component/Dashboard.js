@@ -21,22 +21,16 @@ export const Dashboard = compose(
     ...props,
     rows: props.data.dashboard,
     onPrev: () => {
-      const current = props.row;
-
-      let index = props.data.dashboard.findIndex(c => c.name === current.name) - 1;
-      if (index < 0) {
-        index = props.data.dashboard.length;
-      }
-      props.setRow(props.data.dashboard[index]);
+      const { setRow, row, data: { dashboard } } = props;
+      const previousIndex = dashboard.findIndex(c => c.strategy.id === row.strategy.id) - 1;
+      const index = previousIndex === -1 ? dashboard.length - 1 : previousIndex;
+      setRow(dashboard[index]);
     },
     onNext: () => {
-      const current = props.row;
-
-      let index = props.data.dashboard.findIndex(c => c.name === current.name) + 1;
-      if (index > props.data.dashboard.length) {
-        index = 0;
-      }
-      props.setRow(props.data.dashboard[index]);
+      const { setRow, row, data: { dashboard } } = props;
+      const nextIndex = dashboard.findIndex(c => c.strategy.id === row.strategy.id) + 1;
+      const index = nextIndex === dashboard.length ? 0 : nextIndex;
+      setRow(dashboard[index]);
     }
   })),
   pure

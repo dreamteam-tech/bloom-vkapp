@@ -21,22 +21,16 @@ export const StrategySlider = compose(
     ...props,
     rows: props.data.strategies,
     onPrev: () => {
-      const current = props.row;
-
-      let index = props.data.strategies.findIndex(c => c.name === current.name) - 1;
-      if (index < 0) {
-        index = props.data.strategies.length;
-      }
-      props.setRow(props.data.strategies[index]);
+      const { setRow, row, data: { strategies } } = props;
+      const previousIndex = strategies.findIndex(c => c.id === row.id) - 1;
+      const index = previousIndex === -1 ? strategies.length - 1 : previousIndex;
+      setRow(strategies[index]);
     },
     onNext: () => {
-      const current = props.row;
-
-      let index = props.data.strategies.findIndex(c => c.name === current.name) + 1;
-      if (index > props.data.strategies.length) {
-        index = 0;
-      }
-      props.setRow(props.data.strategies[index]);
+      const { setRow, row, data: { strategies } } = props;
+      const nextIndex = strategies.findIndex(c => c.id === row.id) + 1;
+      const index = nextIndex === strategies.length ? 0 : nextIndex;
+      setRow(strategies[index]);
     }
   })),
   pure

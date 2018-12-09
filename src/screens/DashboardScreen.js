@@ -26,7 +26,9 @@ export const Container = ({ go, onClose, setOpen, isOpen }) => (
       left={<HeaderButton icon='Menu' onClick={() => setOpen(true)} />}
       title='Рабочий стол'/>
     <Transition>
-      <Dashboard onClick={strategy => go('Pay', { strategy })} />
+      <Dashboard
+        onPay={strategy => go('Pay', { strategy })}
+        onWithdraw={() => null} />
     </Transition>
   </Screen>
 );

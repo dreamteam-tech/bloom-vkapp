@@ -4,7 +4,7 @@ import { formatMoney } from '../utils';
 import { HeaderButton } from './HeaderButton';
 import { StrategyChart } from './StrategyChart';
 
-const DashboardRow = ({ row, onClick }) => (
+const DashboardRow = ({ row, onPay, onWithdraw }) => (
   <div>
     <div className="b-dashboard__hero">
       <div className="b-dashboard__item">
@@ -37,18 +37,29 @@ const DashboardRow = ({ row, onClick }) => (
         </div>
       </div>
     </div>
-    <Button modifiers='rounded' onClick={() => onClick(row.strategy)}>Инвестировать</Button>
+    <div className="b-dashboard__group">
+      <Button
+        modifiers='rounded'
+        onClick={() => onPay(row.strategy)}>
+        Инвестировать
+      </Button>
+      <Button
+        modifiers='rounded'
+        onClick={() => onWithdraw(row.strategy)}>
+        Вывод средств
+      </Button>
+    </div>
     <StrategyChart data={row.chart}/>
   </div>
 );
 
-export const Dashboard = ({ row, rows, onClick, onNext, onPrev }) => row && (
+export const Dashboard = ({ row, rows, onPay, onWithdraw, onNext, onPrev }) => row && (
   <div>
     <div className="b-dashboard__header">
-      <HeaderButton onPrev={onPrev} icon={rows.length > 1 ? 'ArrowLeft' : ''}/>
+      <HeaderButton onClick={onPrev} icon={rows.length > 1 ? 'ArrowLeft' : ''}/>
       <H1 className='b-dashboard__title'>{row.strategy.name}</H1>
-      <HeaderButton onPrev={onNext} icon={rows.length > 1 ? 'ArrowRight' : ''}/>
+      <HeaderButton onClick={onNext} icon={rows.length > 1 ? 'ArrowRight' : ''}/>
     </div>
-    <DashboardRow onClick={onClick} row={row}/>
+    <DashboardRow onPay={onPay} onWithdraw={onWithdraw} row={row}/>
   </div>
 );

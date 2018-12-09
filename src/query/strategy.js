@@ -8,6 +8,14 @@ export const STRATEGY_LIST = gql`
       description
       percent
       has_investments
+      companies {
+        company {
+          id
+          name
+          description
+        }
+        percent
+      }
     }
   }
 `;

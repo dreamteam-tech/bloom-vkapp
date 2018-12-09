@@ -1,6 +1,6 @@
 import React from 'react';
 import { H1, H2, Transition } from 'firefly/component';
-import { TransactionList, StrategyChart, HeaderMenuButton } from '../component';
+import { TransactionList, StrategyPieChart, StrategyChart, HeaderMenuButton } from '../component';
 import { Content, Header, StrategySummary, Screen } from '../container';
 
 export const StrategyViewScreen = ({ strategy, go }) => (
@@ -11,6 +11,8 @@ export const StrategyViewScreen = ({ strategy, go }) => (
     <Transition>
       <Content>
         <StrategySummary strategy={strategy} />
+        <StrategyPieChart strategy={strategy} />
+        <H2>Доходность</H2>
         <StrategyChart strategy={strategy} />
       </Content>
       <Content>

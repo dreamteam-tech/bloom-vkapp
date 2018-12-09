@@ -1,6 +1,6 @@
 import React from 'react';
-import { H1, H2, Transition } from 'firefly/component';
-import { TransactionList, StrategyPieChart, StrategyChart, HeaderMenuButton } from '../component';
+import { H2, Transition } from 'firefly/component';
+import { StrategyPieChart, StrategyChart, HeaderMenuButton } from '../component';
 import { Content, Header, StrategySummary, Screen } from '../container';
 
 export const StrategyViewScreen = ({ strategy, go }) => (
@@ -10,15 +10,13 @@ export const StrategyViewScreen = ({ strategy, go }) => (
       title={strategy.name}/>
     <Transition>
       <Content>
-        <StrategySummary strategy={strategy} />
-        <StrategyPieChart strategy={strategy} />
-        <H2>Доходность</H2>
-        <StrategyChart strategy={strategy} />
+        <StrategySummary strategy={strategy}/>
       </Content>
+      <StrategyPieChart strategy={strategy}/>
       <Content>
-        <H2>Операции</H2>
+        <H2>Доходность</H2>
       </Content>
-      <TransactionList strategy={strategy} />
+      <StrategyChart strategy={strategy}/>
     </Transition>
   </Screen>
 );

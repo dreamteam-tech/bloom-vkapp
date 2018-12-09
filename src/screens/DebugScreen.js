@@ -1,5 +1,5 @@
 import React from 'react';
-import { StrategySlider, Dashboard } from '../component';
+import { StrategySlider } from '../component';
 import { HeaderButton, Header, Screen } from '../container';
 
 export const DebugScreen = ({ go, onClose, setOpen, isOpen }) => (

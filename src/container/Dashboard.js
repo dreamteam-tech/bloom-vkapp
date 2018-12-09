@@ -1,7 +1,9 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
-import { bem, Button, H1, Icon } from 'firefly/component';
+import { Divider, H2, bem, Button, H1, Icon } from 'firefly/component';
+import { TransactionList } from '../component/TransactionList';
 import { formatMoney } from '../utils';
+import { Content } from './Content';
 import { HeaderButton } from './HeaderButton';
 import { StrategyChart } from './StrategyChart';
 
@@ -79,5 +81,10 @@ export const Dashboard = ({ row, rows, onPay, onWithdraw, onNext, onPrev }) => r
       <HeaderButton onClick={onNext} icon={rows.length > 1 ? 'ArrowRight' : ''}/>
     </div>
     <DashboardRow onPay={onPay} onWithdraw={onWithdraw} row={row}/>
+    <Divider />
+    <Content>
+      <H2>Операции</H2>
+    </Content>
+    <TransactionList filter={{ strategy_id: row.strategy.id }}/>
   </div>
 );

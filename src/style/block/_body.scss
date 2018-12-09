@@ -2,7 +2,7 @@
   @include antialias;
   background: {
     color: flexy-color(blue);
-    image: linear-gradient(flexy-color(blue), darken(flexy-color(blue), 15%));
+    image: linear-gradient(darken(flexy-color(blue), 5%), flexy-color(blue));
     repeat: no-repeat;
     position: 0 0;
   }

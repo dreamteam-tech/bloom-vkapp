@@ -1,18 +1,22 @@
-import { bem, Icon } from 'firefly/component';
-import moment from 'moment';
 import React from 'react';
 import { ResponsivePieCanvas } from '@nivo/pie';
 import { ListRow } from '../container';
-import { formatMoney } from '../utils';
 
 export const StrategyPieChart = ({ strategy }) => (
   <div>
     <div className='b-chart__container'>
       <ResponsivePieCanvas
-        data={strategy.companies.map(item => ({
-          id: item.company.id,
+        data={strategy.companies.map((item, i) => ({
+          id: item.company.name,
           label: item.company.name,
           value: item.percent,
+          color: [
+            '#f193ff',
+            '#4cddff',
+            '#2ecc71',
+            '#ff6790',
+            '#ffbe2f',
+          ][i] || '#41DF99'
         }))}
         margin={{
           top: 32,
@@ -22,11 +26,12 @@ export const StrategyPieChart = ({ strategy }) => (
         }}
         pixelRatio={2}
         sortByValue={true}
-        innerRadius={0.8}
-        padAngle={1}
-        cornerRadius={2}
-        colors="pastel2"
-        colorBy="id"
+        innerRadius={.65}
+        padAngle={0}
+        cornerRadius={0}
+        colors="greens"
+        borderWidth={1}
+        colorBy={d => d.color}
         borderColor="inherit"
         radialLabelsSkipAngle={10}
         radialLabelsTextXOffset={6}
@@ -45,12 +50,10 @@ export const StrategyPieChart = ({ strategy }) => (
     </div>
     <div>
       {strategy.companies.map((item, i) => (
-        <ListRow key={i} className='b-transaction-row'>
+        <ListRow key={i} className='b-company-row'>
+          <div>{item.company.name}</div>
           <div>
-            <div className="b-transaction-row__type">{item.company.name}</div>
-          </div>
-          <div>
-            <div className="b-transaction-row__date">
+            <div className="b-company-row__percent">
               {item.percent}%
             </div>
           </div>
